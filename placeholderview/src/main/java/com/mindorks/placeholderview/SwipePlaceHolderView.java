@@ -200,6 +200,10 @@ public class SwipePlaceHolderView extends FrameLayout implements
             if(mSwipeViewBinderList.indexOf(swipeViewBinder) == 0){
                 swipeViewBinder.setOnTouch();
             }
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                frameView.getChildAt(0).setId(View.generateViewId());
+            }
         }
         return this;
     }
@@ -820,6 +824,10 @@ public class SwipePlaceHolderView extends FrameLayout implements
     @Override
     protected boolean addViewInLayout(View child, int index, ViewGroup.LayoutParams params, boolean preventRequestLayout) {
         return super.addViewInLayout(child, index, params, preventRequestLayout);
+    }
+
+    public View getCurrentView() {
+        return mSwipeViewBinderList.get(0).getLayoutView().getChildAt(0);
     }
 
     /**
